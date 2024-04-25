@@ -2,12 +2,16 @@ function f = shepard_spear(trueDists,redDists,plotTitle,xaxisTitle,yaxisTitle)
 %UNTITLED Summary of this function goes here
 %   Detailed explanation goes here
 
+if size(trueDists,1) == 1
+    trueDists = trueDists';
+    redDists = redDists';
+end
 
 %disp is the isotonic regression mapping from pcaDists to trueDists
 disparities = lsqisotonic(trueDists,redDists);
 [~,ord] = sortrows([disparities(:) trueDists(:)]);
 
-corr = spearman_rho(trueDists,redDists);
+corr = spearman_rho(trueDists',redDists');
 
 % make the Shepard plot
 f = figure;

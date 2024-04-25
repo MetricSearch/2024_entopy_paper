@@ -2,9 +2,14 @@ function rho = spearman_rho(deltas,zetas)
 %UNTITLED Summary of this function goes here
 %   Detailed explanation goes here
 
-% switch the data (probably outcome of pdist) to columns
-% and sort on the first column
-sorted = sortrows([ deltas' zetas' ]);
+% input params should be columns of numbers, if they are rows switch them
+% to columns
+if size(deltas,1) == 1
+    deltas = deltas';
+    zetas = zetas';
+end
+
+sorted = sortrows([ deltas zetas ]);
 
 % because the zeds are ordered
 zeds = (linspace(1,size(deltas,2),size(deltas,2)))';
